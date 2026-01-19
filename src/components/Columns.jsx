@@ -12,7 +12,7 @@ function Column({ column }) {
       <div className="flex flex-col gap-3">
         {column.taskIds.map((taskId) => {
           const task = state.tasks[taskId];
-          return <Task key={task.id} task={task} />;
+          return <Task key={task.id} task={task} columnId={column.id} />;
         })}
       </div>
       <button

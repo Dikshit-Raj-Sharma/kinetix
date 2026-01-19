@@ -36,10 +36,36 @@ export function BoardProvider({ children }) {
     });
   }
 
+  function deleteTask(columnId,taskId){
+    setState((prev) =>{
+      const column=prev.columns[columnId];
+      const newTaskIds=column.taskIds.filter((id)=> id!==taskId);
+
+      const newColumn={
+        ...column,
+        taskIds:newTaskIds,
+      }
+
+      const newTask={...prev.tasks};
+      delete newTask[taskId];
+
+      return {
+        ...prev,
+        tasks: newTask,
+        columns:{
+          ...prev.columns,
+          [columnId]:newColumn,
+        }
+      }
+    })
+    
+  }
+
   const value = {
     state,
     setState,
     addTask,
+    deleteTask,
   };
 
   return (
