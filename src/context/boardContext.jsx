@@ -26,46 +26,59 @@ export function BoardProvider({ children }) {
         ...prev,
         tasks: {
           ...prev.tasks,
-          [newTaskId]: newTask
+          [newTaskId]: newTask,
         },
-        columns:{
+        columns: {
           ...prev.columns,
-          [columnId]:newColumn,
+          [columnId]: newColumn,
         },
       };
     });
   }
 
-  function deleteTask(columnId,taskId){
-    setState((prev) =>{
-      const column=prev.columns[columnId];
-      const newTaskIds=column.taskIds.filter((id)=> id!==taskId);
+  function deleteTask(columnId, taskId) {
+    setState((prev) => {
+      const column = prev.columns[columnId];
+      const newTaskIds = column.taskIds.filter((id) => id !== taskId);
 
-      const newColumn={
+      const newColumn = {
         ...column,
-        taskIds:newTaskIds,
-      }
+        taskIds: newTaskIds,
+      };
 
-      const newTask={...prev.tasks};
+      const newTask = { ...prev.tasks };
       delete newTask[taskId];
 
       return {
         ...prev,
         tasks: newTask,
-        columns:{
+        columns: {
           ...prev.columns,
-          [columnId]:newColumn,
-        }
-      }
-    })
-    
+          [columnId]: newColumn,
+        },
+      };
+    });
   }
-
+  function editTask(taskId, newContent) {
+    setState((prev) => {
+      return {
+        ...prev,
+        tasks: {
+          ...prev.tasks,
+          [taskId]: {
+            ...prev.tasks[taskId],
+            content: newContent,
+          },
+        },
+      };
+    });
+  }
   const value = {
     state,
     setState,
     addTask,
     deleteTask,
+    editTask,
   };
 
   return (
