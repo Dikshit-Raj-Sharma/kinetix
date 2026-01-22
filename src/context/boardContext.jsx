@@ -1,11 +1,22 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import initialData from "../data/initialData";
 import { v4 } from "uuid";
 
 const BoardContext = createContext(null);
 
 export function BoardProvider({ children }) {
-  const [state, setState] = useState(initialData);
+  const [state, setState] = useState(()=>{
+    const savedData=localStorage.getItem("kinetix-board");
+
+    return savedData ? JSON.parse(savedData) : initialData;
+  });
+
+  useEffect(()=>{
+
+    const jsonString=JSON.stringify(state);
+
+    localStorage.setItem('kinetix-board',jsonString);
+  },[state])
 
   function addTask(columnId) {
     const newTaskId = v4();
