@@ -1,19 +1,24 @@
 import Task from "./Task";
 import { useBoard } from "../context/boardContext";
+import {SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import {useDroppable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
 function Column({ column }) {
   const { state, addTask } = useBoard();
-
+  const { setNodeRef } = useDroppable({ id: column.id });
   return (
-    <div className="w-80 bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shrink-0 shadow-md">
+    <div ref={setNodeRef} className="w-80 bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shrink-0 shadow-md">
       <h2 className="font-bold text-lg mb-4 text-gray-700 dark:text-white">
         {column.title}
       </h2>
       <div className="flex flex-col gap-3">
-        {column.taskIds.map((taskId) => {
-          const task = state.tasks[taskId];
-          return <Task key={task.id} task={task} columnId={column.id} />;
-        })}
+        <SortableContext items={column.taskIds} strategy={verticalListSortingStrategy}>
+          {column.taskIds.map((taskId) => {
+            const task = state.tasks[taskId];
+            return <Task key={task.id} task={task} columnId={column.id} />;
+          })}
+        </SortableContext>
       </div>
       <button
         onClick={() => addTask(column.id)}
