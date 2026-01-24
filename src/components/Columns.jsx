@@ -6,9 +6,10 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Trash2 } from "lucide-react";
 
 function Column({ column }) {
-  const { state, addTask } = useBoard();
+  const { state, addTask, deleteColumn } = useBoard();
 
   const {
     attributes,
@@ -45,13 +46,36 @@ function Column({ column }) {
       <div
         {...attributes}
         {...listeners}
-        className="cursor-grab active:cursor-grabbing"
+        className="w-80 shrink-0 group flex items-center justify-between mb-4 cursor-grab active:cursor-grabbing 
+             rounded-md px-2 py-2 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
       >
-        <h2 className="font-bold text-lg mb-4 text-gray-700 dark:text-white">
-          {column.title}
-        </h2>
+        <div className="flex items-center gap-2">
+          <h2 className="font-semibold text-base text-gray-700 dark:text-white truncate">
+            {column.title}
+          </h2>
+
+          <span
+            className="text-xs px-2 py-0.5 rounded-full bg-gray-300 text-gray-700 
+                   dark:bg-gray-700 dark:text-gray-200"
+          >
+            {column.taskIds.length}
+          </span>
+        </div>
+        <button
+          onClick={() => {
+            const ok = window.confirm("Delete this column and all its tasks?");
+            if (ok) deleteColumn(column.id);
+          }}
+          onPointerDown={(e) => e.stopPropagation()}
+          className="relative inline-flex items-center justify-center rounded-md p-2
+               text-gray-500 hover:text-red-500 
+               hover:bg-red-500/10 dark:hover:bg-red-500/20
+               opacity-0 group-hover:opacity-100 transition-all"
+        >
+          <Trash2 size={18} />
+        </button>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 grow min-h-[100px]">
         <SortableContext
           items={column.taskIds}
           strategy={verticalListSortingStrategy}
@@ -67,7 +91,7 @@ function Column({ column }) {
         className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-md border-2 border-dashed border-gray-600 text-gray-400 hover:text-white hover:border-white hover:bg-gray-700 transition-all"
       >
         <span className="text-xl font-bold">+</span> Add Task
-      </button>{" "}
+      </button>
     </div>
   );
 }

@@ -6,9 +6,11 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { Plus } from "lucide-react";
+
 
 export default function App() {
-  const { state, setState } = useBoard();
+  const { state, setState, createNewColumn } = useBoard();
 
   const { activeId, sensors, handleDragStart, onDragEnd } = useDragHandler(
     state,
@@ -16,7 +18,7 @@ export default function App() {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900 p-8">
+    <main className="h-screen w-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900 p-8 overflow-x-auto overflow-y-hidden">
       <DndContext
         collisionDetection={closestCorners}
         onDragStart={handleDragStart}
@@ -33,6 +35,35 @@ export default function App() {
               return <Column key={column.id} column={column} />;
             })}
           </SortableContext>
+          <button
+            onClick={createNewColumn}
+            className="
+              h-[60px] 
+              w-80 
+              shrink-0 
+              rounded-lg 
+              border-2 
+              border-dashed 
+              border-gray-400 
+              bg-transparent 
+              flex 
+              items-center 
+              justify-center 
+              gap-2 
+              text-gray-500 
+              hover:border-gray-500 
+              hover:text-gray-600 
+              hover:bg-gray-200/50 
+              dark:border-gray-700 
+              dark:text-gray-400 
+              dark:hover:border-gray-500 
+              dark:hover:bg-gray-800/50 
+              transition-all
+            "
+          >
+            <Plus size={24} />
+            <span className="font-semibold">Add Column</span>
+          </button>
         </div>
         <DragOverlay>
           {activeId ? (

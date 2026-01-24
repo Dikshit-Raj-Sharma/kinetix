@@ -5,18 +5,17 @@ import { v4 } from "uuid";
 const BoardContext = createContext(null);
 
 export function BoardProvider({ children }) {
-  const [state, setState] = useState(()=>{
-    const savedData=localStorage.getItem("kinetix-board");
+  const [state, setState] = useState(() => {
+    const savedData = localStorage.getItem("kinetix-board");
 
     return savedData ? JSON.parse(savedData) : initialData;
   });
 
-  useEffect(()=>{
+  useEffect(() => {
+    const jsonString = JSON.stringify(state);
 
-    const jsonString=JSON.stringify(state);
-
-    localStorage.setItem('kinetix-board',jsonString);
-  },[state])
+    localStorage.setItem("kinetix-board", jsonString);
+  }, [state]);
 
   function addTask(columnId) {
     const newTaskId = v4();
@@ -84,14 +83,53 @@ export function BoardProvider({ children }) {
       };
     });
   }
+  function createNewColumn() {
+    const id = v4();
+    const newColumn = {
+      id: id,
+      title: "New Column",
+      taskIds: [],
+    };
+    setState((prev) => ({
+      ...prev,
+      columns: {
+        ...prev.columns,
+        [id]: newColumn,
+      },
+      columnOrder: [...prev.columnOrder, id],
+    }));
+  }
+  function deleteColumn(columnId) {
+    setState((prev) => {
+      const columnToDelete = prev.columns[columnId];
+      if (!columnToDelete) return prev;
+
+      const newTasks = { ...prev.tasks };
+      columnToDelete.taskIds.forEach((taskId) => {
+        delete newTasks[taskId];
+      });
+
+      const newColumns = { ...prev.columns };
+      delete newColumns[columnId];
+
+      const newColumnOrder = prev.columnOrder.filter((id) => id !== columnId);
+      return {
+        ...prev,
+        columns: newColumns,
+        columnOrder: newColumnOrder,
+        tasks: newTasks,
+      };
+    });
+  }
   const value = {
     state,
     setState,
     addTask,
     deleteTask,
     editTask,
+    createNewColumn,
+    deleteColumn,
   };
-
   return (
     <BoardContext.Provider value={value}>{children}</BoardContext.Provider>
   );
