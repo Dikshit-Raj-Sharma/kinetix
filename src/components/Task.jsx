@@ -45,6 +45,17 @@ function Task({ task, columnId }) {
               className="w-full bg-gray-50 dark:bg-gray-800 border border-blue-500 rounded px-2 py-1 text-gray-700 dark:text-gray-200 focus:outline-none"
               value={text}
               onChange={(e) => setText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.stopPropagation();
+                  handleSave();
+                }
+                if (e.key === "Escape") {
+                  e.stopPropagation();
+                  handleCancel();
+                }
+              }}
+              onPointerDown={(e) => e.stopPropagation()}
             />
             <div className="flex gap-2">
               <button

@@ -121,6 +121,21 @@ export function BoardProvider({ children }) {
       };
     });
   }
+
+  function updateColumnTitle(columnId, newTitle) {
+    setState((prev) => {
+      const column = prev.columns[columnId];
+      if (column.title === newTitle) return prev;
+
+      return {
+        ...prev,
+        columns: {
+          ...prev.columns,
+          [columnId]: { ...column, title: newTitle },
+        },
+      };
+    });
+  }
   const value = {
     state,
     setState,
@@ -129,6 +144,8 @@ export function BoardProvider({ children }) {
     editTask,
     createNewColumn,
     deleteColumn,
+    updateColumnTitle,
+    
   };
   return (
     <BoardContext.Provider value={value}>{children}</BoardContext.Provider>
