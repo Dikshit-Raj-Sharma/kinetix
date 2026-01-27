@@ -24,3 +24,7 @@
     background: #475569; /* slate-600 */
   }
 }
+html, body {
+  /* Prevents 'pull to refresh' on mobile which interferes with dragging */
+  overscroll-behavior-y: none; 
+}

@@ -33,29 +33,29 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900">
-      <header className="shrink-0 py-6 px-8 flex items-center justify-center">
-        <div className="flex items-center gap-4">
+    <div className="flex flex-col h-dvh bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900">
+      <header className="shrink-0 py-6 px-4 md:px-8 flex items-center justify-center">
+        <div className="flex items-center gap-3 md:gap-4">
           <img
             src="/kinetix-icon.png"
             alt="Kinetix Logo"
-            className="w-25 h-25 object-contain drop-shadow-xl"
+            className="w-12 h-12 md:w-16 md:h-16 object-contain drop-shadow-xl"
           />
 
           <div className="flex flex-col justify-center">
-            <h1 className="text-[56px] font-black tracking-wide leading-none select-none">
+            <h1 className="text-4xl md:text-[56px] font-black tracking-wide leading-none select-none">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 filter drop-shadow-sm">
                 KINETIX
               </span>
             </h1>
 
-            <span className="text-[16px] font-bold text-slate-500 dark:text-white tracking-[0.2em] uppercase mt-1">
+            <span className="text-[10px] md:text-[16px] font-bold text-slate-500 dark:text-white tracking-[0.2em] uppercase mt-1">
               Work Flow Platform
             </span>
           </div>
         </div>
       </header>
-      <main className="h-screen w-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900 p-8 overflow-x-auto overflow-y-hidden">
+      <main className="flex-1 w-full p-4 md:p-8 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
         <DndContext
           collisionDetection={collisionDetectionStrategy}
           onDragStart={handleDragStart}

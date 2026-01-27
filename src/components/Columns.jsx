@@ -58,7 +58,7 @@ function Column({ column }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="w-80 bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shrink-0 shadow-md flex flex-col max-h-[calc(100vh-250px)]"
+      className="w-80 bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shrink-0 shadow-md flex flex-col max-h-[calc(100vh-250px)] snap-center"
     >
       <div
         {...attributes}
