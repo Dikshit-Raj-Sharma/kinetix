@@ -58,12 +58,12 @@ function Column({ column }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shrink-0 shadow-md flex flex-col"
+      className="w-80 bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shrink-0 shadow-md flex flex-col max-h-[calc(100vh-250px)]"
     >
       <div
         {...attributes}
         {...listeners}
-        className="w-80 shrink-0 group flex items-center justify-between mb-4 cursor-grab active:cursor-grabbing 
+        className="shrink-0 group flex items-center justify-between mb-4 cursor-grab active:cursor-grabbing 
              rounded-md px-2 py-2 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
       >
         {isEditing ? (
@@ -137,7 +137,7 @@ function Column({ column }) {
           </div>
         )}
       </div>
-      <div className="flex flex-col gap-3 grow min-h-[100px]">
+      <div className="flex flex-col gap-3 flex-1 overflow-y-auto min-h-0 pr-2">
         <SortableContext
           items={column.taskIds}
           strategy={verticalListSortingStrategy}
@@ -150,7 +150,7 @@ function Column({ column }) {
       </div>
       <button
         onClick={() => addTask(column.id)}
-        className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-md border-2 border-dashed border-gray-600 text-gray-400 hover:text-white hover:border-white hover:bg-gray-700 transition-all"
+        className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-md border-2 border-dashed border-gray-600 text-gray-400 hover:text-white hover:border-white hover:bg-gray-700 transition-all shrink-0"
       >
         <span className="text-xl font-bold">+</span> Add Task
       </button>
