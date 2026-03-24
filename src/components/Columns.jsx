@@ -7,11 +7,16 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Trash2, Pencil, Check, X } from "lucide-react";
+import { Trash2, Pencil, Check, X, ArrowDownUp } from "lucide-react";
 
 function Column({ column }) {
-  const { state, addTask, deleteColumn, updateColumnTitle } = useBoard();
-
+  const {
+    state,
+    addTask,
+    deleteColumn,
+    updateColumnTitle,
+    sortColumnByPriority,
+  } = useBoard();
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(column.title);
 
@@ -104,33 +109,44 @@ function Column({ column }) {
             </div>
           </div>
         ) : (
-          <div className="flex items-center gap-2 overflow-hidden">
+          <div className="flex items-center gap-2 overflow-hidden w-full">
             <h2 className="font-bold text-lg text-gray-700 dark:text-white truncate">
               {column.title}
             </h2>
             <span className="text-xs px-2 py-0.5 rounded-full bg-gray-300 text-gray-700 dark:bg-gray-700 dark:text-gray-200">
               {column.taskIds.length}
             </span>
+            
+            {/* Sort button  */}
+            {column.taskIds.length > 1 && (
+              <button
+                onClick={() => sortColumnByPriority(column.id)}
+                onPointerDown={(e) => e.stopPropagation()} 
+                className="p-1 text-slate-400 hover:text-blue-500 hover:bg-blue-500/10 rounded-md transition-colors"
+                title="Sort High to Low"
+              >
+                <ArrowDownUp size={14} />
+              </button>
+            )}
           </div>
         )}
+
+        {/* Action Buttons (Edit/Delete) */}
         {!isEditing && (
-          <div className="flex items-center gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-            {" "}
-            {/* 2. THE EDIT BUTTON */}
+          <div className="flex items-center gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity ml-2">
             <button
               onClick={() => setIsEditing(true)}
-              onPointerDown={(e) => e.stopPropagation()} // Stop Drag
+              onPointerDown={(e) => e.stopPropagation()} 
               className="p-1 text-gray-500 hover:text-blue-500 hover:bg-blue-500/10 rounded"
             >
               <Pencil size={16} />
             </button>
-            {/* THE DELETE BUTTON */}
             <button
               onClick={() => {
                 const ok = window.confirm("Delete this column?");
                 if (ok) deleteColumn(column.id);
               }}
-              onPointerDown={(e) => e.stopPropagation()} // Stop Drag
+              onPointerDown={(e) => e.stopPropagation()} 
               className="p-1 text-gray-500 hover:text-red-500 hover:bg-red-500/10 rounded"
             >
               <Trash2 size={16} />

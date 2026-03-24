@@ -22,6 +22,7 @@ export function BoardProvider({ children }) {
     const newTask = {
       id: newTaskId,
       content: "New task",
+      priority:"low"
     };
 
     setState((prev) => {
@@ -136,6 +137,38 @@ export function BoardProvider({ children }) {
       };
     });
   }
+  // 1. Cycle through priorities
+  function cycleTaskPriority(taskId) {
+    setState((prev) => {
+      const task = prev.tasks[taskId];
+      const currentPri = task.priority || "low";
+      const nextPri = currentPri === "low" ? "medium" : currentPri === "medium" ? "high" : "low";
+      
+      return {
+        ...prev,
+        tasks: { ...prev.tasks, [taskId]: { ...task, priority: nextPri } },
+      };
+    });
+  }
+
+  // 2. Sort column by priority (High -> Medium -> Low)
+  function sortColumnByPriority(columnId) {
+    setState((prev) => {
+      const column = prev.columns[columnId];
+      const weights = { high: 3, medium: 2, low: 1 };
+      
+      const sortedTaskIds = [...column.taskIds].sort((a, b) => {
+        const priA = prev.tasks[a].priority || "low";
+        const priB = prev.tasks[b].priority || "low";
+        return weights[priB] - weights[priA]; // Highest first
+      });
+
+      return {
+        ...prev,
+        columns: { ...prev.columns, [columnId]: { ...column, taskIds: sortedTaskIds } },
+      };
+    });
+  }
   const value = {
     state,
     setState,
@@ -145,7 +178,8 @@ export function BoardProvider({ children }) {
     createNewColumn,
     deleteColumn,
     updateColumnTitle,
-    
+    cycleTaskPriority,
+    sortColumnByPriority
   };
   return (
     <BoardContext.Provider value={value}>{children}</BoardContext.Provider>
