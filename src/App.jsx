@@ -67,7 +67,7 @@ export default function App() {
           </div>
         </div>
       </header>
-      <main className="flex-1 w-full p-4 md:p-8 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
+<main className={`flex-1 w-full p-4 md:p-8 overflow-x-auto overflow-y-hidden ${!activeId ? "snap-x snap-mandatory" : ""}`}>        {" "}
         <DndContext
           collisionDetection={collisionDetectionStrategy}
           onDragStart={handleDragStart}
@@ -160,7 +160,6 @@ export default function App() {
       >
         <Plus size={28} />
       </button>
-
     </div>
   );
 }

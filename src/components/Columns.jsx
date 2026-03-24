@@ -114,7 +114,8 @@ function Column({ column }) {
           </div>
         )}
         {!isEditing && (
-          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div className="flex items-center gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+            {" "}
             {/* 2. THE EDIT BUTTON */}
             <button
               onClick={() => setIsEditing(true)}
@@ -123,7 +124,6 @@ function Column({ column }) {
             >
               <Pencil size={16} />
             </button>
-
             {/* THE DELETE BUTTON */}
             <button
               onClick={() => {
