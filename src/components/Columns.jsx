@@ -74,6 +74,7 @@ function Column({ column }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               onKeyDown={(e) => {
+                e.stopPropagation();
                 if (e.key === "Enter") {
                   e.stopPropagation();
                   saveTitle();

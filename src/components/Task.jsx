@@ -46,6 +46,7 @@ function Task({ task, columnId }) {
               value={text}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={(e) => {
+                e.stopPropagation();
                 if (e.key === "Enter") {
                   e.stopPropagation();
                   handleSave();

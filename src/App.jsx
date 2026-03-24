@@ -6,6 +6,10 @@ import {
   DragOverlay,
   pointerWithin,
   rectIntersection,
+  useSensor,      
+  useSensors, 
+  MouseSensor,    
+  TouchSensor
 } from "@dnd-kit/core";
 import { useDragHandler } from "./hooks/useDragHandler";
 import {
@@ -17,9 +21,17 @@ import { Kanban } from "lucide-react";
 export default function App() {
   const { state, setState, createNewColumn } = useBoard();
 
-  const { activeId, sensors, handleDragStart, onDragEnd } = useDragHandler(
+  const { activeId, handleDragStart, onDragEnd } = useDragHandler(
     state,
     setState,
+  );
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+        activationConstraint: { distance: 10 }, // Desktop: Move 10px to start drag
+    }),
+    useSensor(TouchSensor, {
+        activationConstraint: { delay: 250, tolerance: 5 }, // Mobile: Press & hold for 250ms
+    })
   );
   const collisionDetectionStrategy = (args) => {
     // 1. Who is the active item?
