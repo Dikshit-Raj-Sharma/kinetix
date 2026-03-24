@@ -6,10 +6,10 @@ import {
   DragOverlay,
   pointerWithin,
   rectIntersection,
-  useSensor,      
-  useSensors, 
-  MouseSensor,    
-  TouchSensor
+  useSensor,
+  useSensors,
+  MouseSensor,
+  TouchSensor,
 } from "@dnd-kit/core";
 import { useDragHandler } from "./hooks/useDragHandler";
 import {
@@ -27,11 +27,11 @@ export default function App() {
   );
   const sensors = useSensors(
     useSensor(MouseSensor, {
-        activationConstraint: { distance: 10 }, // Desktop: Move 10px to start drag
+      activationConstraint: { distance: 10 }, // Desktop: Move 10px to start drag
     }),
     useSensor(TouchSensor, {
-        activationConstraint: { delay: 250, tolerance: 5 }, // Mobile: Press & hold for 250ms
-    })
+      activationConstraint: { delay: 250, tolerance: 5 }, // Mobile: Press & hold for 250ms
+    }),
   );
   const collisionDetectionStrategy = (args) => {
     // 1. Who is the active item?
@@ -87,6 +87,7 @@ export default function App() {
             <button
               onClick={createNewColumn}
               className="
+              hidden md:flex
               h-[60px] 
               w-80 
               shrink-0 
@@ -157,6 +158,32 @@ export default function App() {
           </DragOverlay>
         </DndContext>
       </main>
+      <button
+        onClick={createNewColumn}
+        className="
+          md:hidden 
+          fixed 
+          bottom-6 
+          right-6 
+          w-14 
+          h-14 
+          rounded-full 
+          bg-gradient-to-r from-blue-600 to-purple-600 
+          text-white 
+          shadow-xl 
+          shadow-blue-900/20
+          flex 
+          items-center 
+          justify-center 
+          active:scale-95 
+          transition-transform 
+          z-50
+        "
+        aria-label="Add new column"
+      >
+        <Plus size={28} />
+      </button>
+
     </div>
   );
 }
