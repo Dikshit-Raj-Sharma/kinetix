@@ -28,3 +28,18 @@ html, body {
   /* Prevents 'pull to refresh' on mobile which interferes with dragging */
   overscroll-behavior-y: none; 
 }
+
+.bg-dots {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-dots {
+    background-image: radial-gradient(rgba(226, 232, 240, 0.25) 1.5px, transparent 1px);
+  }
+}
+
+.dark .bg-dots {
+  background-image: radial-gradient(rgba(226, 232, 240, 0.1) 1px, transparent 1px);
+}

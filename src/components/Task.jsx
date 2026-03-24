@@ -32,8 +32,8 @@ function Task({ task, columnId }) {
     setIsEditing(false);
   };
 
-  const baseClasses = "group relative bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm hover:shadow-md border border-slate-200/60 dark:border-slate-700/60 transition-all hover:-translate-y-0.5";
-
+const baseClasses =
+    "group relative bg-white/80 dark:bg-slate-900/50 backdrop-blur-sm p-3 rounded-xl shadow-sm hover:shadow-md border border-white/50 dark:border-white/10 transition-all hover:-translate-y-0.5 hover:bg-white dark:hover:bg-slate-900/80";
   return (
     <>
       {isEditing ? (
@@ -41,8 +41,7 @@ function Task({ task, columnId }) {
           <div className="flex flex-col gap-2">
             <input
               autoFocus
-              className="w-full bg-gray-50 dark:bg-gray-800 border border-blue-500 rounded px-2 py-1 text-gray-700 dark:text-gray-200 focus:outline-none"
-              value={text}
+className="w-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-blue-500/50 rounded px-2 py-1 text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-500 transition-colors"              value={text}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={(e) => {
                 e.stopPropagation();

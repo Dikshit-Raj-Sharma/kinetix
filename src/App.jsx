@@ -45,7 +45,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-dvh bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900">
+    <div className="flex flex-col h-dvh bg-slate-50 dark:bg-[#090b11] bg-dots">
       <header className="shrink-0 py-6 px-4 md:px-8 flex items-center justify-center">
         <div className="flex items-center gap-3 md:gap-4">
           <img
@@ -67,7 +67,10 @@ export default function App() {
           </div>
         </div>
       </header>
-<main className={`flex-1 w-full p-4 md:p-8 overflow-x-auto overflow-y-hidden ${!activeId ? "snap-x snap-mandatory" : ""}`}>        {" "}
+      <main
+        className={`flex-1 w-full p-4 md:p-8 overflow-x-auto overflow-y-hidden ${!activeId ? "snap-x snap-mandatory" : ""}`}
+      >
+        {" "}
         <DndContext
           collisionDetection={collisionDetectionStrategy}
           onDragStart={handleDragStart}
@@ -86,7 +89,7 @@ export default function App() {
             </SortableContext>
             <button
               onClick={createNewColumn}
-              className="h-[60px] w-80 shrink-0 rounded-xl bg-white/40 dark:bg-slate-800/30 hover:bg-white/60 dark:hover:bg-slate-800/60 backdrop-blur-sm border border-white/40 dark:border-slate-700/50 flex items-center justify-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all snap-center cursor-pointer shadow-sm"
+              className="h-[60px] w-80 shrink-0 rounded-xl bg-slate-200/50 dark:bg-slate-800/40 backdrop-blur-[2px] border border-slate-300/50 dark:border-slate-700/50 flex items-center justify-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all snap-center cursor-pointer shadow-sm"
             >
               <Plus size={24} />
               <span className="font-semibold">Add Column</span>

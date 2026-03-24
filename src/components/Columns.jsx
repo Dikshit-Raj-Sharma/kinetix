@@ -58,7 +58,7 @@ function Column({ column }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="w-80 bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-white/20 dark:border-slate-700/50 rounded-xl p-4 shrink-0 shadow-lg flex flex-col max-h-[calc(100vh-250px)] snap-center"
+      className="w-80 bg-slate-200/50 dark:bg-slate-800/40 backdrop-blur-[2px] border border-slate-300/50 dark:border-slate-700/50 rounded-xl p-4 shrink-0 shadow-xl flex flex-col max-h-[calc(100vh-250px)] snap-center"
     >
       <div
         {...attributes}
@@ -148,6 +148,12 @@ function Column({ column }) {
             return <Task key={task.id} task={task} columnId={column.id} />;
           })}
         </SortableContext>
+
+        {column.taskIds.length === 0 && (
+          <div className="h-24 flex items-center justify-center rounded-lg border-2 border-dashed border-slate-300/50 dark:border-slate-600/50 text-slate-400 dark:text-slate-500 text-sm font-medium italic select-none">
+            Drop tasks here...
+          </div>
+        )}
       </div>
       <button
         onClick={() => addTask(column.id)}
