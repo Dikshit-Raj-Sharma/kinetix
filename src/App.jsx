@@ -86,30 +86,7 @@ export default function App() {
             </SortableContext>
             <button
               onClick={createNewColumn}
-              className="
-              hidden md:flex
-              h-[60px] 
-              w-80 
-              shrink-0 
-              rounded-lg 
-              border-2 
-              border-dashed 
-              border-gray-400 
-              bg-transparent 
-              flex 
-              items-center 
-              justify-center 
-              gap-2 
-              text-gray-500 
-              hover:border-gray-500 
-              hover:text-gray-600 
-              hover:bg-gray-200/50 
-              dark:border-gray-700 
-              dark:text-gray-400 
-              dark:hover:border-gray-500 
-              dark:hover:bg-gray-800/50 
-              transition-all
-            "
+              className="h-[60px] w-80 shrink-0 rounded-xl bg-white/40 dark:bg-slate-800/30 hover:bg-white/60 dark:hover:bg-slate-800/60 backdrop-blur-sm border border-white/40 dark:border-slate-700/50 flex items-center justify-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-all snap-center cursor-pointer shadow-sm"
             >
               <Plus size={24} />
               <span className="font-semibold">Add Column</span>

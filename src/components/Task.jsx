@@ -32,8 +32,7 @@ function Task({ task, columnId }) {
     setIsEditing(false);
   };
 
-  const baseClasses =
-    "group relative bg-white dark:bg-gray-700 p-3 rounded-md shadow-sm border border-gray-200 dark:border-gray-600";
+  const baseClasses = "group relative bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm hover:shadow-md border border-slate-200/60 dark:border-slate-700/60 transition-all hover:-translate-y-0.5";
 
   return (
     <>

@@ -41,7 +41,7 @@ function Column({ column }) {
       ></div>
     );
   }
- const saveTitle = () => {
+  const saveTitle = () => {
     setIsEditing(false);
     if (title.trim() === "") {
       setTitle(column.title);
@@ -58,7 +58,7 @@ function Column({ column }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="w-80 bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shrink-0 shadow-md flex flex-col max-h-[calc(100vh-250px)] snap-center"
+      className="w-80 bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-white/20 dark:border-slate-700/50 rounded-xl p-4 shrink-0 shadow-lg flex flex-col max-h-[calc(100vh-250px)] snap-center"
     >
       <div
         {...attributes}
@@ -151,7 +151,7 @@ function Column({ column }) {
       </div>
       <button
         onClick={() => addTask(column.id)}
-        className="w-full mt-4 flex items-center justify-center gap-2 py-3 rounded-md border-2 border-dashed border-gray-600 text-gray-400 hover:text-white hover:border-white hover:bg-gray-700 transition-all shrink-0"
+        className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-transparent hover:bg-slate-200 dark:hover:bg-slate-700/50 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors shrink-0"
       >
         <span className="text-xl font-bold">+</span> Add Task
       </button>
